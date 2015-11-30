@@ -16,6 +16,7 @@ module Fedex
         }
         @label_specification.merge! options[:label_specification] if options[:label_specification]
         @customer_specified_detail = options[:customer_specified_detail] if options[:customer_specified_detail]
+        @printed_label_origin = options[:printed_label_origin] if options[:printed_label_origin]
       end
 
       # Sends post request to Fedex web service and parse the response.
@@ -75,6 +76,7 @@ module Fedex
           xml.ImageType @label_specification[:image_type]
           xml.LabelStockType @label_specification[:label_stock_type]
           xml.CustomerSpecifiedDetail{ hash_to_xml(xml, @customer_specified_detail) } if @customer_specified_detail
+          xml.PrintedLabelOrigin{ hash_to_xml(xml, @printed_label_origin) } if @printed_label_origin
         }
       end
 
